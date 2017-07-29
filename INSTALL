@@ -1,0 +1,34 @@
+Installation instructions
+
+
+Compile
+
+Unpack tar.bz2 package file:
+	$ tar -jxf tapecat-1.0.x.tar.bz2
+
+'cd' to package directory:
+	$ cd tapecat-1.0.x
+	
+Review and edit 'Makefile' (if needed).
+
+Run 'make' command to compile package:
+	$ make
+
+
+
+Install
+
+As 'root' user run:
+	# make install
+
+It will install:
+	application 'tapecat' under '/usr/local/bin' directory.
+	manual files under '/usr/local/man'.
+
+
+
+Uninstall
+
+In package directory just type:
+	# make uninstall
+

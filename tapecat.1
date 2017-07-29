@@ -1,0 +1,97 @@
+.\"
+.\" Copyright 2006 Inventive Technology GmbH
+.\" 
+.\" This file is part of tapecat.
+.\"
+.\" tapecat is free software; you can redistribute it and/or modify it under the terms of the GNU 
+.\" General Public License as published by the Free Software Foundation - version 2 of the License.
+.\"
+.\" tapecat is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+.\" even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+.\" General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License along with tapecat; if not,
+.\" write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+.\" MA 02110-1301, USA.  
+.\"
+.TH TAPECAT "1" "April 2006" "tapecat 1.0.0" "Tape utility commands"
+.SH NAME
+tapecat \- list the catalog of a tape, ie, it's physical content.
+.SH SYNOPSIS
+.B tapecat
+[\fIOPTION\fR]... [\fITAPE_DEVICE\fR]...
+.SH DESCRIPTION
+.\" Add any additional description here
+.PP
+\fBtapecat\fR is a tape utility used to describe the physical content of a tape.
+By physical content it's meant the files written on tape as understood by the tape driver.
+It's not meant the content of each such file.
+.PP
+The output will present the number of the file on tape, it's size based on tape blocks read
+and the type of file. The type of file will be shown using the \fBfile\fR(1) command. So, this 
+command needs to be available.
+.PP
+A special treatment is reserved for amanda tapes, where all information regarding the tape
+and it's content is displayed. The information includes the tape label, the diskdevice and
+the diskname as specified in the disklist file.
+.PP
+To give the size of the file, the tape is read block by block and the size of each block is
+summed (this can be a very slow operation). If you are not interested on the size of the
+files, use \-\-fast: it will read only the first block of each file and then skip to the 
+next file.
+.PP
+The default operation rewinds the tape and then starts reading all files. If you want to
+start listing the content from a particular point on the tape you should first position the
+tape and then use \-\-norewind. Reading will start from the current tape position.
+.PP
+For such operations be carefull with the tape device you are using. Auto-rewind devices 
+always perform a rewind at the end of operations and then you are always at the tape 
+beginning. Auto-rewind SCSI tape devices are /dev/st* and no-rewind devices are the 
+corresponding /dev/nst*.
+.PP
+If TAPE_DEVICE is not specified /dev/nst0 is used as default.
+.SH OPTIONS
+.TP
+.B \-d, \-\-debug
+Turn on debugging messages.
+.TP
+.B \-f, \-\-fast
+Turn on fast scan of the tape. It reads only the first block of each file on tape and
+then skips to the next file. In this mode the size of the file on tape is not available.
+.TP
+.B \-k, \-\-debugblk
+Turn on block debugging. Block debugging prints a message for each block read on
+the tape. Implies \-\-debug.
+.TP
+.B \-r, \-\-norewind
+Don't do a rewind prior to start reading the tape. Be carefull if you are using an 
+auto-rewind device: as the name implies it will make a rewind by itself.
+.TP
+.B \-s N, \-\-dumpsize=N
+Set the number of bytes to dump to N. Implies \-\-dumpdata.
+.TP
+.B \-u, \-\-dumpdata
+Dump bytes from the beginning of each file on tape to stdin. The number of bytes dumped
+can be set using \-\-dumpsize. Default is 512. Output is shown in hex and ascii.
+.TP
+.B \-\-help
+Shows a brief help message and exits.
+.SH AUTHOR
+Written by Robert Marussi.
+.SH "REPORTING BUGS"
+Report bugs to bugs@inventivetechnology.at.
+.SH COPYRIGHT
+Copyright \(co 2006 Inventive Technology GmbH
+.PP
+tapecat is free software; you can redistribute it and/or modify it under the terms of the GNU 
+General Public License as published by the Free Software Foundation; version 2 of the License.
+.PP
+tapecat is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+General Public License for more details.
+.PP
+You should have received a copy of the GNU General Public License along with tapecat; if not,
+write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+MA 02110-1301, USA 
+.SH "SEE ALSO"
+\fBmt\fR(1), \fBst\fR(4)
