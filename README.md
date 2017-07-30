@@ -10,5 +10,6 @@ The code is saved here so that it does not get lost
 in the meantime. 
 
 Link to the original source:
-http://web.archive.org/web/20070712150422/http://www.inventivetechnology.at/tapecat/
 
+* http://web.archive.org/web/20070712150422/http://www.inventivetechnology.at/tapecat/ (source)
+* http://www.itech.at/tapecat/ (website with broken links to the source)
